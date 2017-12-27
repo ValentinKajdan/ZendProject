@@ -7,13 +7,27 @@
 
 namespace Application\Controller;
 
+use Application\Entity\Meetup;
+use Application\Repository\MeetupRepository;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
 {
+    /**
+     * @var MeetupRepository
+     */
+    private $meetupRepository;
+
+    public function __construct(MeetupRepository $meetupRepository)
+    {
+        $this->meetupRepository = $meetupRepository;  
+    }
+
     public function indexAction()
     {
-        return new ViewModel();
+        return new ViewModel([
+            'meetups' => $this->meetupRepository->findAll(),
+        ]);
     }
 }
