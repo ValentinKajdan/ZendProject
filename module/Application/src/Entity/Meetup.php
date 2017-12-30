@@ -44,13 +44,13 @@ class Meetup
      */
     private $dateFin = '';
 
-    public function __construct(string $title, string $description = '', datetime $dateDebut, datetime $dateFin)
+    public function __construct(string $title, string $description, string $dateDebut, string $dateFin)
     {
         $this->id = Uuid::uuid4()->toString();
         $this->title = $title;
         $this->description = $description;
-        $this->dateDebut = $dateDebut;
-        $this->dateFin = $dateFin;
+        $this->dateDebut = new \DateTime($dateDebut);
+        $this->dateFin = new \DateTime($dateFin);
     }
 
     /**

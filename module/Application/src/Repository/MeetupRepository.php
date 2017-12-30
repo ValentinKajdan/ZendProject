@@ -16,8 +16,8 @@ final class MeetupRepository extends EntityRepository
         $this->getEntityManager()->flush($meetup);
     }
 
-    public function createMeetupFromNameAndDescription(string $name, string $description)
+    public function createMeetup(string $title, string $description, string $dateDebut, string $dateFin)
     {
-        return new Meetup($name, $description);
+        return new Meetup($title, $description, $dateDebut, $dateFin);
     }
 }

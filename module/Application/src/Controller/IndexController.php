@@ -9,6 +9,8 @@ namespace Application\Controller;
 
 use Application\Entity\Meetup;
 use Application\Repository\MeetupRepository;
+use Application\Form\MeetupForm;
+use Zend\Http\PhpEnvironment\Request;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -19,15 +21,48 @@ class IndexController extends AbstractActionController
      */
     private $meetupRepository;
 
-    public function __construct(MeetupRepository $meetupRepository)
+    /**
+     * @var MeetupForm
+     */
+    private $meetupForm;
+
+    public function __construct(MeetupRepository $meetupRepository, MeetupForm $meetupForm)
     {
-        $this->meetupRepository = $meetupRepository;  
+        $this->meetupRepository = $meetupRepository;
+        $this->meetupForm = $meetupForm;
     }
 
     public function indexAction()
     {
         return new ViewModel([
             'meetups' => $this->meetupRepository->findAll(),
+        ]);
+    }
+
+    public function addAction()
+    {
+        $form = $this->meetupForm;
+
+        /* @var $request Request */
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $form->setData($request->getPost());
+            if ($form->isValid()) {
+                $meetup = $this->meetupRepository->createMeetup(
+                    $form->getData()['title'],
+                    $form->getData()['description'],
+                    $form->getData()['dateDebut'],
+                    $form->getData()['dateFin'] ?? ''
+                );
+                $this->meetupRepository->add($meetup);
+                return $this->redirect()->toRoute('home');
+            }
+        }
+
+        $form->prepare();
+
+        return new ViewModel([
+            'form' => $form,
         ]);
     }
 }
