@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Application\Form\MeetupForm;
 use Zend\Router\Http\Literal;
+use Zend\Router\Http\Segment;
 use Application\Controller;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
@@ -32,11 +33,25 @@ return [
                     ],
                 ],
             ],
+            'meetup' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route'    => '/meetup/:id',
+                    'defaults' => [
+                        'controller' => Controller\MeetupController::class,
+                        'action'     => 'index',
+                    ],
+                    'constraints' => [
+                      'id' => '\d'
+                    ]
+                ],
+            ]
         ],
     ],
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => Controller\IndexControllerFactory::class,
+            Controller\MeetupController::class => Controller\MeetupControllerFactory::class,
         ],
     ],
     'service_manager' => [
@@ -54,6 +69,7 @@ return [
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'application/index/add' => __DIR__ . '/../view/application/index/add.phtml',
+            'application/index/meetup' => __DIR__ . '/../view/application/meetup/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ],

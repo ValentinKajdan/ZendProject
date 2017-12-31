@@ -5,7 +5,9 @@
 
         <ul>
           <?php foreach ($this->meetups as $meetup): ?>
-            <li><?= $meetup->getTitle() ?></li>
+            <a href="<?= $this->url('meetup', ['id' => $meetup->getId()]) ?>">
+              <li><?= $meetup->getTitle() ?></li>
+            </a>
           <?php endforeach; ?>
         </ul>
 

@@ -20,7 +20,8 @@ class Meetup
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="string", length=36)
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
      **/
     private $id;
 
@@ -46,11 +47,18 @@ class Meetup
 
     public function __construct(string $title, string $description, string $dateDebut, string $dateFin)
     {
-        $this->id = Uuid::uuid4()->toString();
         $this->title = $title;
         $this->description = $description;
         $this->dateDebut = new \DateTime($dateDebut);
         $this->dateFin = new \DateTime($dateFin);
+    }
+
+    /**
+     * @return int
+     */
+    public function getId() : int
+    {
+        return $this->id;
     }
 
     /**
@@ -86,9 +94,9 @@ class Meetup
     }
 
     /**
-     * @return datetime
+     * @return \DateTime
      */
-    public function getDateDebut() : string
+    public function getDateDebut() : \DateTime
     {
         return $this->dateDebut;
     }
@@ -102,9 +110,9 @@ class Meetup
     }
 
     /**
-     * @return datetime
+     * @return \DateTime
      */
-    public function getDateFin() : string
+    public function getDateFin() : \DateTime
     {
         return $this->dateFin;
     }

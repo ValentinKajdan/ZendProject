@@ -1,0 +1,17 @@
+<div class="row">
+
+  <a href="<?= $this->url('home'); ?>" class="btn btn-primary">Liste des meetups</a>
+
+    <div class="col-md-12">
+      <?php $meetup = $this->meetup[0] ?>
+        <h1><?= $meetup->getTitle(); ?></h1>
+        <h3><?= $meetup->getDescription(); ?></h3>
+        <div class="col-md-6">
+          Date de début : <?= $meetup->getDateDebut()->format('g:ia \o\n l jS F Y'); ?>
+        </div>
+        <div class="col-md-6">
+          Date de fin : <?= $meetup->getDateFin()->format('g:ia \o\n l jS F Y'); ?>
+        </div>
+    </div>
+
+  </div>
