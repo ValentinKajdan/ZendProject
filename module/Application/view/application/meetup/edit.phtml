@@ -1,0 +1,33 @@
+<?php $meetup = $this->meetup[0] ?>
+
+<div class="row">
+  <div class="col-md-12">
+    <a href="<?= $this->url('home'); ?>" class="btn btn-primary">Liste des meetups</a>
+    <a href="<?= $this->url('meetup', ['id' => $meetup->getId()]); ?>" class="btn btn-primary">Retour au meetup</a>
+  </div>
+
+  <?php
+      $form = $this->form; /* @var $form \Zend\Form\Form */
+  ?>
+
+    <div class="col-md-12">
+
+      <br/>
+
+      <?= $this->form()->openTag($form); ?>
+
+      <?= $this->formRow($form->get('title')) ?>
+      <br/>
+      <?= $this->formRow($form->get('description')) ?>
+      <br/>
+      <?= $this->formRow($form->get('dateDebut')) ?>
+      <br/>
+      <?= $this->formRow($form->get('dateFin')) ?>
+      <br/>
+      <?= $this->formInput($form->get('submit')) ?>
+
+      <?= $this->form()->closeTag($form); ?>
+
+    </div>
+
+  </div>

@@ -16,8 +16,6 @@ final class IndexControllerFactory
         $meetupRepository = $container->get(EntityManager::class)->getRepository(Meetup::class);
         $meetupForm = $container->get(MeetupForm::class);
 
-        // var_dump($meetupRepository);
-
         return new IndexController($meetupRepository, $meetupForm);
     }
 }

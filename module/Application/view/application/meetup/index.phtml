@@ -1,9 +1,11 @@
 <div class="row">
+  <?php $meetup = $this->meetup[0] ?>
 
   <a href="<?= $this->url('home'); ?>" class="btn btn-primary">Liste des meetups</a>
+  <a href="<?= $this->url('meetup/edit', ['id' => $meetup->getId()]); ?>" class="btn btn-warning">Modifier le meetup</a>
+  <a href="<?= $this->url('meetup/delete', ['id' => $meetup->getId()]); ?>" class="btn btn-danger">Delete</a>
 
     <div class="col-md-12">
-      <?php $meetup = $this->meetup[0] ?>
         <h1><?= $meetup->getTitle(); ?></h1>
         <h3><?= $meetup->getDescription(); ?></h3>
         <div class="col-md-6">

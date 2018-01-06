@@ -45,6 +45,27 @@ return [
                       'id' => '\d'
                     ]
                 ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'edit' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route'    => '/edit',
+                            'defaults' => [
+                                'action'     => 'edit',
+                            ],
+                        ],
+                    ],
+                    'delete' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route'    => '/delete',
+                            'defaults' => [
+                                'action'     => 'delete',
+                            ],
+                        ],
+                    ],
+                ],
             ]
         ],
     ],
@@ -70,6 +91,7 @@ return [
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'application/index/add' => __DIR__ . '/../view/application/index/add.phtml',
             'application/index/meetup' => __DIR__ . '/../view/application/meetup/index.phtml',
+            'application/index/meetup/edit' => __DIR__ . '/../view/application/meetup/edit.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ],
