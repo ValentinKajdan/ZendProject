@@ -102,9 +102,9 @@ class Meetup
     }
 
     /**
-     * @param datetime $dateDebut
+     * @param \DateTime $dateDebut
      */
-    public function setDateDebut(datetime $dateDebut) : void
+    public function setDateDebut(\DateTime $dateDebut) : void
     {
         $this->dateDebut = $dateDebut;
     }
@@ -118,9 +118,9 @@ class Meetup
     }
 
     /**
-     * @param datetime $dateFin
+     * @param \DateTime $dateFin
      */
-    public function setDateFin(datetime $dateFin) : void
+    public function setDateFin(\DateTime $dateFin) : void
     {
         $this->dateFin = $dateFin;
     }

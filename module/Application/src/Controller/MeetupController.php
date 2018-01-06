@@ -40,28 +40,26 @@ class MeetupController extends AbstractActionController
         ]);
     }
 
-    public function editAction()
+    public function updateAction()
     {
         $form = $this->meetupForm;
         $id = $this->params()->fromRoute('id');
-        $meetup = $this->meetupRepository->findById($id);
+        $meetup = $this->meetupRepository->findById($id)[0];
         // $form->setDefaults(array(
         //   'title'=> $meetup->getTitle()
         // ));
-        var_dump($form);
+        // var_dump($form->title);
 
         /* @var $request Request */
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setData($request->getPost());
             if ($form->isValid()) {
-                $meetup = $this->meetupRepository->createMeetup(
-                    $form->getData()['title'],
-                    $form->getData()['description'],
-                    $form->getData()['dateDebut'],
-                    $form->getData()['dateFin'] ?? ''
-                );
-                $this->meetupRepository->add($meetup);
+                $meetup->setTitle($form->getData()['title']);
+                $meetup->setDescription($form->getData()['description']);
+                $meetup->setDateDebut(new \DateTime($form->getData()['dateDebut']));
+                $meetup->setDateFin(new \DateTime($form->getData()['dateFin']));
+                $this->meetupRepository->update($meetup);
                 return $this->redirect()->toRoute('home');
             }
         }
@@ -78,7 +76,6 @@ class MeetupController extends AbstractActionController
     {
         $id = $this->params()->fromRoute('id');
         $meetup = $this->meetupRepository->findOneBy(array('id' => $id));
-        var_dump($meetup);
         $this->meetupRepository->delete($meetup);
         return $this->redirect()->toRoute('home');
     }

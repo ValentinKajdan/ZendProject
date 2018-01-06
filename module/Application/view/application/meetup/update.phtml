@@ -1,0 +1,47 @@
+<?php $meetup = $this->meetup[0] ?>
+
+<div class="row">
+  <div class="col-md-12">
+    <a href="<?= $this->url('home'); ?>" class="btn btn-primary">Liste des meetups</a>
+    <a href="<?= $this->url('meetup', ['id' => $meetup->getId()]); ?>" class="btn btn-primary">Retour au meetup</a>
+  </div>
+
+  <?php
+      $form = $this->form; /* @var $form \Zend\Form\Form */
+      $meetup = $this->meetup[0];
+  ?>
+
+  <div class="col-md-12">
+      <h1><?= $meetup->getTitle(); ?></h1>
+      <h3><?= $meetup->getDescription(); ?></h3>
+      <div class="col-md-6">
+        Date de début : <?= $meetup->getDateDebut()->format('g:ia \o\n l jS F Y'); ?>
+      </div>
+      <div class="col-md-6">
+        Date de fin : <?= $meetup->getDateFin()->format('g:ia \o\n l jS F Y'); ?>
+      </div>
+  </div>
+
+    <div class="col-md-12">
+
+      <br/>
+
+      <?= $this->form()->openTag($form); ?>
+
+      <?php //var_dump($this->formRow($form->get('title'))); ?>
+
+      Nouveau titre : <?= $this->formRow($form->get('title')) ?>
+      <br/>
+      Nouvelle description : <?= $this->formRow($form->get('description')) ?>
+      <br/>
+      Nouvelle date de début : <?= $this->formRow($form->get('dateDebut')) ?>
+      <br/>
+      Nouvelle date de fin : <?= $this->formRow($form->get('dateFin')) ?>
+      <br/>
+      <?= $this->formInput($form->get('submit')) ?>
+
+      <?= $this->form()->closeTag($form); ?>
+
+    </div>
+
+  </div>

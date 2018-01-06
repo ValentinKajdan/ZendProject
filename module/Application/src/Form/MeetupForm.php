@@ -25,7 +25,7 @@ class MeetupForm extends Form implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'type' => Element\Text::class,
+            'type' => Element\Textarea::class,
             'name' => 'description',
             'options' => [
                 'label' => 'Description',

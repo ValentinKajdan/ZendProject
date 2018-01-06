@@ -52,7 +52,7 @@ return [
                         'options' => [
                             'route'    => '/edit',
                             'defaults' => [
-                                'action'     => 'edit',
+                                'action'     => 'update',
                             ],
                         ],
                     ],
